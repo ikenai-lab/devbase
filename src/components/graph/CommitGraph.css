@@ -1,0 +1,52 @@
+.commit-graph-container {
+    padding: 1.5rem;
+    color: var(--text-primary);
+}
+
+.commit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.commit-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.commit-row:hover {
+    background-color: var(--bg-surface-hover);
+}
+
+.commit-node {
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-top: 0.1rem;
+}
+
+.commit-details {
+    flex: 1;
+}
+
+.commit-message {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.commit-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.commit-hash {
+    font-family: monospace;
+    color: var(--accent-secondary);
+}

@@ -5,42 +5,46 @@
 import {
     LayoutDashboard,
     Search,
-    BarChart3,
+    PieChart,
     Trash2,
-    Settings,
     ChevronLeft,
     ChevronRight,
-    GitBranch
+    Code2
 } from 'lucide-react';
-import { useAppStore, View } from '../../stores/appStore';
+import { useAppStore } from '../../stores/appStore';
 import './Sidebar.css';
 
-interface NavItem {
-    id: View;
-    label: string;
-    icon: React.ReactNode;
-}
-
-const navItems: NavItem[] = [
-    { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
-    { id: 'search', label: 'Global Search', icon: <Search size={20} /> },
-    { id: 'analytics', label: 'Analytics', icon: <BarChart3 size={20} /> },
-    { id: 'hygiene', label: 'Disk Hygiene', icon: <Trash2 size={20} /> },
-    { id: 'settings', label: 'Settings', icon: <Settings size={20} /> },
-];
-
 export function Sidebar() {
-    const { currentView, setCurrentView, sidebarCollapsed, toggleSidebar } = useAppStore();
+    const {
+        currentView,
+        setCurrentView,
+        version,
+        sidebarCollapsed,
+        toggleSidebar
+    } = useAppStore();
+
+    const navItems = [
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { id: 'search', label: 'Search', icon: Search },
+        { id: 'analytics', label: 'Analytics', icon: PieChart },
+        { id: 'hygiene', label: 'Hygiene', icon: Trash2 },
+    ];
 
     return (
         <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-header">
-                <div className="logo">
-                    <GitBranch size={28} />
-                    {!sidebarCollapsed && <span className="logo-text">DevBase</span>}
-                </div>
-                <button className="collapse-btn" onClick={toggleSidebar} title="Toggle sidebar">
-                    {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+                {!sidebarCollapsed && (
+                    <div className="logo">
+                        <Code2 size={24} />
+                        <span className="logo-text">DevBase</span>
+                    </div>
+                )}
+                <button
+                    className="collapse-btn"
+                    onClick={toggleSidebar}
+                    aria-label="Toggle Sidebar"
+                >
+                    {sidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
                 </button>
             </div>
 
@@ -49,10 +53,12 @@ export function Sidebar() {
                     <button
                         key={item.id}
                         className={`nav-item ${currentView === item.id ? 'active' : ''}`}
-                        onClick={() => setCurrentView(item.id)}
-                        title={item.label}
+                        onClick={() => setCurrentView(item.id as any)}
+                        title={sidebarCollapsed ? item.label : ''}
                     >
-                        <span className="nav-icon">{item.icon}</span>
+                        <span className="nav-icon">
+                            <item.icon size={20} />
+                        </span>
                         {!sidebarCollapsed && <span className="nav-label">{item.label}</span>}
                     </button>
                 ))}
@@ -60,9 +66,7 @@ export function Sidebar() {
 
             <div className="sidebar-footer">
                 {!sidebarCollapsed && (
-                    <div className="version-info">
-                        <span>v{useAppStore.getState().version}</span>
-                    </div>
+                    <div className="version-info">v{version}</div>
                 )}
             </div>
         </aside>

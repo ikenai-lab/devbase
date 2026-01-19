@@ -16,6 +16,10 @@ pub enum DevBaseError {
     #[error("File system error: {0}")]
     FileSystem(#[from] std::io::Error),
 
+    /// Git errors.
+    #[error("Git error: {0}")]
+    Git(#[from] git2::Error),
+
     /// Configuration errors.
     #[error("Configuration error: {message}")]
     Config { message: String },
@@ -41,6 +45,7 @@ impl From<DevBaseError> for IpcError {
         let code = match &err {
             DevBaseError::Database(_) => "DATABASE_ERROR",
             DevBaseError::FileSystem(_) => "FILESYSTEM_ERROR",
+            DevBaseError::Git(_) => "GIT_ERROR",
             DevBaseError::Config { .. } => "CONFIG_ERROR",
             DevBaseError::Scan { .. } => "SCAN_ERROR",
             DevBaseError::Internal { .. } => "INTERNAL_ERROR",

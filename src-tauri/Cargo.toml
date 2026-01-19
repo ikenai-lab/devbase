@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Local Repository Viewer & Manager - Code Mission Control"
 authors = ["DevBase Team"]
 edition = "2021"
+default-run = "devbase"
 
 [lib]
 name = "devbase_lib"
@@ -31,6 +32,22 @@ dirs = "5"
 
 # Async runtime (for future use)
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+
+# Git operations
+git2 = "0.19"
+
+# File system watcher
+notify = "6"
+
+# Directory traversal
+walkdir = "2"
+
+# Date/time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# URL parsing
+url = "2"
+tauri-plugin-dialog = "2"
 
 [lints.rust]
 unsafe_code = "forbid"

@@ -1,0 +1,234 @@
+.repo-grid-container {
+    padding: 1.5rem;
+}
+
+/* Toolbar */
+.repo-toolbar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-main);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+    transition: border-color var(--transition-fast);
+}
+
+.search-bar:focus-within {
+    border-color: var(--accent-primary);
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.search-bar svg {
+    color: var(--text-muted);
+}
+
+.clear-search {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.clear-search:hover {
+    color: var(--text-primary);
+}
+
+/* Styled Dropdown */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-main);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    padding-right: 0.75rem;
+    /* Space for arrow */
+    transition: border-color var(--transition-fast);
+}
+
+.filter-bar:focus-within {
+    border-color: var(--accent-primary);
+}
+
+.filter-bar .filter-icon {
+    color: var(--text-muted);
+}
+
+.filter-bar .dropdown-arrow {
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.select-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+}
+
+.filter-bar select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0 0.5rem;
+    /* Horizontal padding only */
+    background-image: none !important;
+    /* Kill global arrow */
+    appearance: none;
+}
+
+.filter-bar select option {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.clear-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-main);
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.clear-filters:hover {
+    background: var(--bg-surface-hover);
+}
+
+.scan-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--accent-primary);
+    /* Uses theme accent */
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    /* Always white text on accent */
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-left: auto;
+}
+
+.scan-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.scan-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Error banner */
+.error-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid rgba(255, 71, 87, 0.3);
+    border-radius: 8px;
+    color: var(--error);
+    margin-bottom: 1rem;
+}
+
+.error-banner button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* Empty/Loading states */
+.loading-state,
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.empty-state h3 {
+    margin-top: 1rem;
+    color: var(--text-primary);
+}
+
+.primary-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+}
+
+.repo-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

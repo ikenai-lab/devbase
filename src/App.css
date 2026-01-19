@@ -1,33 +1,4 @@
-/* DevBase - Global Styles */
-
-:root {
-  /* Colors */
-  --bg-primary: #0f0f1a;
-  --bg-secondary: #1a1a2e;
-  --bg-tertiary: #16213e;
-
-  --accent-primary: #9d4edd;
-  --accent-secondary: #c77dff;
-  --accent-glow: rgba(157, 78, 221, 0.3);
-
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.4);
-
-  --success: #00c875;
-  --warning: #ffc107;
-  --error: #ff6b6b;
-
-  --border-subtle: rgba(255, 255, 255, 0.1);
-
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s ease;
-  --transition-slow: 0.4s ease;
-}
+/* DevBase - Global Styles (Cleaned) */
 
 * {
   box-sizing: border-box;
@@ -44,10 +15,81 @@ body,
 
 body {
   font-family: var(--font-family);
-  background: var(--bg-primary);
+  background: var(--bg-main);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-main);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Global button reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Focus styles */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Custom Select Styling */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  padding-right: 2.5rem;
+  /* Space for arrow */
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-image: var(--select-arrow);
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+select:hover {
+  border-color: var(--text-muted);
+}
+
+select:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--selection-bg);
+  color: var(--text-primary);
 }
 
 /* Placeholder view styles */
@@ -68,22 +110,4 @@ body {
 
 .placeholder-view p {
   font-size: 0.95rem;
-}
-
-/* Global button reset */
-button {
-  font-family: inherit;
-}
-
-/* Focus styles for accessibility */
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-
-/* Selection styling */
-::selection {
-  background: var(--accent-primary);
-  color: white;
 }

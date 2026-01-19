@@ -4,16 +4,23 @@
 
 import { useEffect } from 'react';
 import { MainLayout } from './components/layout';
-import { Dashboard } from './components/dashboard';
+import { RepoGrid, RepoDetail } from './components/repos';
+import { Settings } from './components/settings';
 import { useAppStore } from './stores/appStore';
 import { getVersion } from './services/tauri';
 import './App.css';
+import './styles/theme.css';
+import './App.css';
 
 function App() {
-  const { currentView, setVersion, setLoading } = useAppStore();
+  const { currentView, setVersion, setLoading, theme } = useAppStore();
 
   useEffect(() => {
-    // Initialize app
+    // Apply theme
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
     const init = async () => {
       try {
         const version = await getVersion();
@@ -28,11 +35,10 @@ function App() {
     init();
   }, [setVersion, setLoading]);
 
-  // Render the current view
   const renderView = () => {
     switch (currentView) {
       case 'dashboard':
-        return <Dashboard />;
+        return <RepoGrid />;
       case 'search':
         return <PlaceholderView title="Global Search" description="Search across all repositories (Coming in Phase 4)" />;
       case 'analytics':
@@ -40,9 +46,11 @@ function App() {
       case 'hygiene':
         return <PlaceholderView title="Disk Hygiene" description="Clean up old repos and branches (Coming in Phase 5)" />;
       case 'settings':
-        return <PlaceholderView title="Settings" description="Configure scan paths and preferences (Coming in Phase 2)" />;
+        return <Settings />;
+      case 'repo-detail':
+        return <RepoDetail />;
       default:
-        return <Dashboard />;
+        return <RepoGrid />;
     }
   };
 
@@ -53,7 +61,6 @@ function App() {
   );
 }
 
-// Placeholder component for unimplemented views
 function PlaceholderView({ title, description }: { title: string; description: string }) {
   return (
     <div className="placeholder-view">

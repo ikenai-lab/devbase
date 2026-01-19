@@ -1,0 +1,174 @@
+.repo-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-main);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Hover Effect: Glow + Border Color */
+.repo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 24px -6px var(--accent-glow);
+}
+
+/* Header */
+.repo-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-main);
+    background: var(--bg-surface);
+}
+
+.repo-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.repo-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.repo-path {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Status variants using theme variables */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-clean {
+    background: rgba(0, 200, 117, 0.1);
+    color: var(--success);
+}
+
+.status-dirty {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--status-dirty);
+    /* Improved contrast */
+}
+
+.status-ahead {
+    background: var(--accent-glow);
+    color: var(--accent-secondary);
+}
+
+.status-behind {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--error);
+}
+
+.status-diverged {
+    background: rgba(157, 78, 221, 0.1);
+    color: var(--ubuntu-purple-light);
+}
+
+/* Body */
+.repo-card-body {
+    padding: 1rem 1.25rem;
+    flex: 1;
+}
+
+.repo-info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.repo-info-row svg {
+    color: var(--text-muted);
+}
+
+/* Detail chips */
+.repo-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.detail-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.detail-chip.warning {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--warning);
+}
+
+.detail-chip.info {
+    background: var(--accent-glow);
+    color: var(--accent-primary);
+}
+
+.detail-chip.chip-error {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--error);
+}
+
+.detail-chip.muted {
+    background: var(--bg-input);
+    color: var(--text-muted);
+}
+
+/* Footer Actions */
+.repo-card-footer {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border-main);
+    background: var(--bg-surface-hover);
+}
+
+.card-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-main);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.card-action:hover {
+    background: var(--bg-surface-hover);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}

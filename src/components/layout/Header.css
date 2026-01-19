@@ -4,8 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-main);
+    transition: background var(--transition-normal);
 }
 
 .header-left {
@@ -17,7 +18,7 @@
 .page-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -31,7 +32,7 @@
     position: relative;
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     cursor: pointer;
     padding: 8px;
     border-radius: 8px;
@@ -42,17 +43,18 @@
 }
 
 .header-action:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
 }
 
 .header-action.profile {
-    background: rgba(157, 78, 221, 0.2);
-    color: #c77dff;
+    background: var(--accent-glow);
+    color: var(--accent-primary);
 }
 
 .header-action.profile:hover {
-    background: rgba(157, 78, 221, 0.3);
+    background: var(--accent-glow);
+    opacity: 0.8;
 }
 
 .notification-badge {
@@ -62,8 +64,8 @@
     min-width: 16px;
     height: 16px;
     padding: 0 4px;
-    background: #ff4757;
-    color: #fff;
+    background: var(--error);
+    color: white;
     font-size: 0.65rem;
     font-weight: 600;
     border-radius: 8px;
