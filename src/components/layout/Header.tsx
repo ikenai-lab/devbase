@@ -2,7 +2,7 @@
  * Header component for the main content area.
  */
 
-import { Bell, Settings, Sun, Moon } from 'lucide-react';
+import { Settings, Sun, Moon } from 'lucide-react';
 import { useAppStore } from '../../stores/appStore';
 import './Header.css';
 
@@ -40,10 +40,6 @@ export function Header() {
                     <Settings size={20} />
                 </button>
 
-                <button className="header-action" title="Notifications">
-                    <Bell size={20} />
-                    <span className="notification-badge">3</span>
-                </button>
             </div>
         </header>
     );

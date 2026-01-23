@@ -21,38 +21,40 @@
 }
 
 /* Dark Mode (Default) */
+/* Dark Mode (Default) */
 :root {
     /* Backgrounds */
-    --bg-main: #0f0f1a;
-    --bg-surface: #1a1a2e;
-    --bg-surface-hover: #23233c;
-    --bg-input: #111122;
+    --bg-main: #222831;
+    --bg-surface: #31363F;
+    --bg-surface-hover: #393E46;
+    /* Slightly lighter than surface */
+    --bg-input: #222831;
 
     /* Text */
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.4);
-    --text-inverse: #000000;
+    --text-primary: #EEEEEE;
+    --text-secondary: rgba(238, 238, 238, 0.7);
+    --text-muted: rgba(238, 238, 238, 0.5);
+    --text-inverse: #222831;
 
     /* Borders */
-    --border-main: rgba(255, 255, 255, 0.1);
-    --border-highlight: rgba(157, 78, 221, 0.5);
-    /* Purple Highlight */
+    --border-main: rgba(238, 238, 238, 0.1);
+    --border-highlight: rgba(118, 171, 174, 0.5);
+    /* Teal Highlight */
 
     /* Accents */
-    --accent-primary: var(--ubuntu-purple-light);
-    --accent-secondary: #c77dff;
-    --accent-glow: rgba(157, 78, 221, 0.25);
+    --accent-primary: #76ABAE;
+    --accent-secondary: #00ADB5;
+    /* Complementary Teal */
+    --accent-glow: rgba(118, 171, 174, 0.25);
 
-    /* Status Colors */
+    /* Status Colors - Adjusted for new bg */
     --status-dirty: #F6C177;
-    /* Soft Gold for Dark Mode */
 
     /* UI Assets */
-    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23EEEEEE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 
     /* Selection */
-    --selection-bg: rgba(157, 78, 221, 0.3);
+    --selection-bg: rgba(118, 171, 174, 0.3);
 }
 
 /* Light Mode Override */

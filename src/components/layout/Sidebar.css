@@ -1,11 +1,13 @@
 .sidebar {
   width: 240px;
   height: 100vh;
-  background: var(--bg-surface);
+  /* Match main background for seamless look */
+  background: var(--bg-main);
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease, background var(--transition-normal);
   border-right: 1px solid var(--border-main);
+  /* Re-added */
 }
 
 .sidebar.collapsed {
@@ -13,12 +15,23 @@
 }
 
 .sidebar-header {
-  padding: 16px;
+  padding: 32px 16px 16px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-main);
+  /* border-bottom removed */
   min-height: 64px;
+}
+
+/* ... */
+
+.sidebar-footer {
+  padding: 16px;
+  /* border-top removed */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
 .logo {
@@ -100,7 +113,7 @@
 
 .sidebar-footer {
   padding: 16px;
-  border-top: 1px solid var(--border-main);
+  /* border-top removed */
   display: flex;
   flex-direction: column;
   gap: 8px;

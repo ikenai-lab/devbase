@@ -38,14 +38,17 @@ export function RepoDetail() {
                     <span className="repo-path">{repo.path}</span>
                 </div>
                 <div className="repo-actions">
-                    <button className="icon-button active" title="Commit Graph">
-                        <GitGraph size={20} />
+                    <button className="tab-button active">
+                        <GitGraph size={16} />
+                        History
                     </button>
-                    <button className="icon-button" title="Files">
-                        <FileCode size={20} />
+                    <button className="tab-button">
+                        <FileCode size={16} />
+                        Files
                     </button>
-                    <button className="icon-button" title="Pull Requests">
-                        <GitPullRequest size={20} />
+                    <button className="tab-button">
+                        <GitPullRequest size={16} />
+                        PRs
                     </button>
                 </div>
             </div>

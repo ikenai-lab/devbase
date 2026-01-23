@@ -2,14 +2,9 @@ import {
     GitBranch,
     FolderOpen,
     ExternalLink,
-    RefreshCw,
-    CircleDot,
-    ArrowUp,
-    ArrowDown,
-    GitMerge,
-    Archive
+    RefreshCw
 } from 'lucide-react';
-import { RepoInfo, RepoStatus } from '../../services/tauri';
+import { RepoInfo } from '../../services/tauri';
 import { refreshRepo } from '../../services/tauri';
 import { useAppStore } from '../../stores/appStore';
 import { useRepoStore } from '../../stores/repoStore';
@@ -19,13 +14,6 @@ interface RepoCardProps {
     repo: RepoInfo;
 }
 
-const statusConfig: Record<RepoStatus, { icon: React.ReactNode; label: string; className: string }> = {
-    clean: { icon: <CircleDot size={14} />, label: 'Clean', className: 'status-clean' },
-    dirty: { icon: <CircleDot size={14} />, label: 'Dirty', className: 'status-dirty' },
-    ahead: { icon: <ArrowUp size={14} />, label: 'Ahead', className: 'status-ahead' },
-    behind: { icon: <ArrowDown size={14} />, label: 'Behind', className: 'status-behind' },
-    diverged: { icon: <GitMerge size={14} />, label: 'Diverged', className: 'status-diverged' },
-};
 
 export function RepoCard({ repo }: RepoCardProps) {
     const fetchRepositories = useRepoStore(state => state.fetchRepositories);
@@ -59,100 +47,69 @@ export function RepoCard({ repo }: RepoCardProps) {
         console.log('Open folder:', repo.path);
     };
 
-    const statusInfo = statusConfig[repo.status];
+    // const statusInfo = statusConfig[repo.status];
     const { health } = repo;
 
+    const getProgressClass = () => {
+        if (health.is_dirty) return 'status-fill-dirty';
+        if (health.commits_behind > 0) return 'status-fill-behind';
+        if (health.commits_ahead > 0) return 'status-fill-ahead';
+        return 'status-fill-clean';
+    };
+
     return (
-        <div className="repo-card">
-            <div className="repo-card-header clickable" onClick={handleCardClick}>
+        <div className="repo-card" onClick={handleCardClick}>
+            {/* Hover Actions Overlay */}
+            <div className="repo-actions-overlay">
+                <button className="card-action" onClick={handleRefresh} title="Refresh">
+                    <RefreshCw size={14} />
+                </button>
+                <button className="card-action" onClick={handleOpenFolder} title="Open Folder">
+                    <FolderOpen size={14} />
+                </button>
+                <button className="card-action" onClick={handleOpenInCode} title="Open in Editor">
+                    <ExternalLink size={14} />
+                </button>
+            </div>
+
+            <div className="repo-card-header">
                 <div className="repo-name-row">
                     <h3 className="repo-name">{repo.name}</h3>
-                    <span className={`status-badge ${statusInfo.className}`}>
-                        {statusInfo.icon}
-                        {statusInfo.label}
-                    </span>
                 </div>
+                {/* Description / Path */}
                 <p className="repo-path" title={repo.path}>{repo.path}</p>
             </div>
 
             <div className="repo-card-body">
-                {/* Branch info */}
-                <div className="repo-info-row">
-                    <GitBranch size={16} />
-                    <span>{repo.current_branch || repo.default_branch || 'No branch'}</span>
-                </div>
+                {/* Status/Branch Info Row */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 'auto' }}>
+                    <div className="repo-info-row" style={{ margin: 0 }}>
+                        <GitBranch size={14} style={{ display: 'inline', marginRight: 6, verticalAlign: 'text-bottom' }} />
+                        {repo.current_branch || repo.default_branch || 'HEAD'}
+                    </div>
 
-                {/* Health details */}
-                {health.is_dirty && (
-                    <div className="repo-details">
-                        {health.uncommitted_count > 0 && (
-                            <span className="detail-chip warning">
+                    {/* Status Text */}
+                    <div className="status-badge-minimal">
+                        {health.is_dirty ? (
+                            <span style={{ color: 'var(--status-dirty)' }}>
                                 {health.uncommitted_count} uncommitted
                             </span>
-                        )}
-                        {health.staged_count > 0 && (
-                            <span className="detail-chip info">
-                                {health.staged_count} staged
+                        ) : health.commits_behind > 0 ? (
+                            <span style={{ color: 'var(--error)' }}>
+                                {health.commits_behind} behind
                             </span>
+                        ) : (
+                            <span style={{ color: 'var(--success)' }}>Active</span>
                         )}
                     </div>
-                )}
-
-                {(health.commits_ahead > 0 || health.commits_behind > 0) && (
-                    <div className="repo-details">
-                        {health.commits_ahead > 0 && (
-                            <span className="detail-chip info">
-                                <ArrowUp size={12} /> {health.commits_ahead} ahead
-                            </span>
-                        )}
-                        {health.commits_behind > 0 && (
-                            <span className="detail-chip chip-error">
-                                <ArrowDown size={12} /> {health.commits_behind} behind
-                            </span>
-                        )}
-                    </div>
-                )}
-
-                {health.stash_count > 0 && (
-                    <div className="repo-details">
-                        <span className="detail-chip muted">
-                            <Archive size={12} /> {health.stash_count} stashed
-                        </span>
-                    </div>
-                )}
-
-                {/* Tags */}
-                {repo.tags.length > 0 && (
-                    <div className="repo-tags">
-                        {repo.tags.map(tag => (
-                            <span key={tag} className="tag-chip">{tag}</span>
-                        ))}
-                    </div>
-                )}
+                </div>
             </div>
 
+            {/* Footer with ONLY Progress Line */}
             <div className="repo-card-footer">
-                <button
-                    className="card-action"
-                    onClick={handleRefresh}
-                    title="Refresh status"
-                >
-                    <RefreshCw size={16} />
-                </button>
-                <button
-                    className="card-action"
-                    onClick={handleOpenFolder}
-                    title="Open folder"
-                >
-                    <FolderOpen size={16} />
-                </button>
-                <button
-                    className="card-action"
-                    onClick={handleOpenInCode}
-                    title="Open in editor"
-                >
-                    <ExternalLink size={16} />
-                </button>
+                <div className="status-progress-bar">
+                    <div className={`status-progress-fill ${getProgressClass()}`} style={{ width: '100%' }}></div>
+                </div>
             </div>
         </div>
     );

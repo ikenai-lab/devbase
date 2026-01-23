@@ -55,25 +55,30 @@
     gap: 0.5rem;
 }
 
-.icon-button {
-    padding: 0.5rem;
+.tab-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
     background: transparent;
-    border: 1px solid var(--border-main);
-    border-radius: 6px;
+    border: none;
+    border-bottom: 2px solid transparent;
     color: var(--text-muted);
     cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
     transition: all var(--transition-fast);
 }
 
-.icon-button:hover {
+.tab-button:hover {
     color: var(--text-primary);
-    border-color: var(--accent-primary);
+    background: var(--bg-surface-hover);
+    border-radius: 4px 4px 0 0;
 }
 
-.icon-button.active {
-    color: #fff;
-    background: var(--accent-primary);
-    border-color: var(--accent-primary);
+.tab-button.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-primary);
 }
 
 .repo-content {

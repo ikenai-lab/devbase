@@ -1,6 +1,7 @@
 .repo-card {
     background: var(--bg-surface);
-    border: 1px solid var(--border-main);
+    border: none;
+    /* Borderless */
     border-radius: 12px;
     overflow: hidden;
     transition: all var(--transition-normal);
@@ -144,31 +145,96 @@
     color: var(--text-muted);
 }
 
-/* Footer Actions */
-.repo-card-footer {
+/* Action Overlay (Top Right) */
+.repo-actions-overlay {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     display: flex;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border-top: 1px solid var(--border-main);
-    background: var(--bg-surface-hover);
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.repo-card:hover .repo-actions-overlay {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .card-action {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border-main);
+    background: var(--bg-surface);
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-main);
-    border-radius: 6px;
-    color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.2s;
+    background: rgba(30, 30, 46, 0.9);
+    /* Dark backdrop for contrast */
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .card-action:hover {
-    background: var(--bg-surface-hover);
     color: var(--accent-primary);
     border-color: var(--accent-primary);
+    background: var(--bg-surface);
+}
+
+/* Status Bar (New Footer) */
+.repo-card-footer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border: none;
+    background: transparent;
+    margin-top: auto;
+}
+
+/* Status Progress Bar */
+.status-progress-bar {
+    height: 2px;
+    width: 100%;
+    background: var(--bg-input);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.status-progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+.status-fill-clean {
+    background: var(--success);
+}
+
+.status-fill-dirty {
+    background: var(--status-dirty);
+}
+
+.status-fill-ahead {
+    background: var(--accent-secondary);
+}
+
+.status-fill-behind {
+    background: var(--error);
+}
+
+/* Minimal Status Badge (Bottom Right Text) */
+.status-badge-minimal {
+    font-size: 0.7rem;
+    /* Smaller */
+    font-weight: 700;
+    /* Bold */
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    letter-spacing: 0.02em;
 }
